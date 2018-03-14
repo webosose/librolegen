@@ -1,0 +1,11 @@
+{
+	"appId": "XXXIDXXX",
+	"type": "regular",
+	"allowedNames": ["XXXIDXXX"],
+	"permissions": [
+		{
+			"service":"XXXIDXXX",
+			"outbound":["*"]
+		}
+	]
+}
