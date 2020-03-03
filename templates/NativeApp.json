@@ -1,0 +1,23 @@
+{
+    "exeName": "XXXEXEPATHXXX",
+    "type": "regular",
+    "allowedNames": ["com.webos.media.client.*","com.webos.rm.client.*","com.webos.pipeline.*","XXXIDXXX"],
+    "permissions": [
+        {
+            "service":"com.webos.media.client.*",
+            "outbound":["com.webos.media"]
+        },
+        {
+            "service":"com.webos.rm.client.*",
+            "outbound":["com.webos.media"]
+        },
+        {
+            "service":"com.webos.pipeline.*",
+            "outbound":["com.webos.pipelinectrl.*"]
+        },
+        {
+            "service":"XXXIDXXX",
+            "outbound":["*"]
+        }
+    ]
+}
