@@ -1,0 +1,4 @@
+Open Source Software Package:
+- name: webOSOSE-librolegen
+  source: https://github.com/webosose/librolegen
+  license: Apache-2.0
