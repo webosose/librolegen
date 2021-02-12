@@ -2,6 +2,7 @@
     "exeName": "XXXEXEPATHXXX",
     "type": "regular",
     "allowedNames": ["XXXIDXXX"],
+    "trustLevel": "XXXPERMLEVELXXX",
     "permissions": [
         {
             "service":"XXXIDXXX",

@@ -1,4 +1,4 @@
-// Copyright (c) 2010-2018 LG Electronics, Inc.
+// Copyright (c) 2010-2021 LG Electronics, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -54,8 +54,8 @@ static bool fexists(string filename)
 
 static void checkDirStructure()
 {
-	g_mkdir_with_parents(DYN_PUBROLES_PATH, 0700);
-	g_mkdir_with_parents(DYN_PRVROLES_PATH, 0700);
+	(void) g_mkdir_with_parents(DYN_PUBROLES_PATH, 0700);
+	(void) g_mkdir_with_parents(DYN_PRVROLES_PATH, 0700);
 }
 
 void roleGenerate(string templatePath, string destinationPath, string id, string executablePath)
@@ -88,30 +88,30 @@ void roleGenerate(string templatePath, string destinationPath, string id, string
 		newfile.close();
 		myfile.close();
 	}
-	
+
 	// this is temporary until LS has a real API or mechanism to pick up changes
-	gchar *argv[] = {"@WEBOS_INSTALL_SBINDIR@/ls-control", "scan-volatile-dirs", NULL};
+	const gchar *argv[] = {"@WEBOS_INSTALL_SBINDIR@/ls-control", "scan-volatile-dirs", NULL};
 	GSpawnFlags flags = (GSpawnFlags)(G_SPAWN_STDERR_TO_DEV_NULL);
-	g_spawn_sync(NULL, argv, NULL, flags, NULL, NULL, NULL, NULL, NULL, NULL);
+	g_spawn_sync(NULL, (gchar **)argv, NULL, flags, NULL, NULL, NULL, NULL, NULL, NULL);
 }
 
 void ndkGenerateRole(string id, string executablePath)
 {
 	checkDirStructure();
-	
+
 	string templatePath;
 	string destinationPath;
 
 	templatePath = NDK_TEMPLATE_PATH;
 	destinationPath = DYN_PUBROLES_PATH;
 	destinationPath += "/" + id + ".json";
-	
+
 	roleGenerate(templatePath+".pub", destinationPath, id, executablePath);
-	
+
 	templatePath = NDK_TEMPLATE_PATH;
 	destinationPath = DYN_PRVROLES_PATH;
 	destinationPath += "/" + id + ".json";
-	
+
 	roleGenerate(templatePath+".prv", destinationPath, id, executablePath);
 }
 
@@ -124,16 +124,16 @@ void pdkGenerateRole(string id, string executablePath)
 void tritonGenerateRole(string id)
 {
 	checkDirStructure();
-	
+
 	string templatePath;
 	string destinationPath;
 
-	templatePath = TRITON_TEMPLATE_PATH;	
+	templatePath = TRITON_TEMPLATE_PATH;
 	destinationPath = DYN_PUBROLES_PATH;
 	destinationPath += "/" + id + ".json";
-	
+
 	roleGenerate(templatePath+".pub", destinationPath, id, TRITON_EXE_PATH);
-	
+
 	// temporary fix for blowfish. this should really vary
 	// template based on appID giving a limited version to
 	// non com.palm ids
@@ -141,7 +141,7 @@ void tritonGenerateRole(string id)
 		templatePath = TRITON_TEMPLATE_PATH;
 		destinationPath = DYN_PRVROLES_PATH;
 		destinationPath += "/" + id + ".json";
-	
+
 		roleGenerate(templatePath+".prv", destinationPath, id, TRITON_EXE_PATH);
 	// }
 }
