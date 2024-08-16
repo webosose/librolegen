@@ -1,4 +1,4 @@
-// Copyright (c) 2010-2021 LG Electronics, Inc.
+// Copyright (c) 2010-2024 LG Electronics, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -112,13 +112,13 @@ void ndkGenerateRole(string id, string executablePath)
 	destinationPath = DYN_PRVROLES_PATH;
 	destinationPath += "/" + id + ".json";
 
-	roleGenerate(templatePath+".prv", destinationPath, id, executablePath);
+	roleGenerate(templatePath+".prv", std::move(destinationPath), std::move(id), std::move(executablePath));
 }
 
 // deprecated
 void pdkGenerateRole(string id, string executablePath)
 {
-	ndkGenerateRole(id, executablePath);
+	ndkGenerateRole(std::move(id), std::move(executablePath));
 }
 
 void tritonGenerateRole(string id)
@@ -142,6 +142,6 @@ void tritonGenerateRole(string id)
 		destinationPath = DYN_PRVROLES_PATH;
 		destinationPath += "/" + id + ".json";
 
-		roleGenerate(templatePath+".prv", destinationPath, id, TRITON_EXE_PATH);
+		roleGenerate(templatePath+".prv", std::move(destinationPath), std::move(id), TRITON_EXE_PATH);
 	// }
 }
